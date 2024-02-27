@@ -1,43 +1,47 @@
 import React, { useEffect, useState } from 'react'
-import api from '../../api/instance'
-import axios from 'axios';
-import { createQRCode } from '../../api';
-import FormQR from '../../compontents/uploadqrcontent/FormQR';
-import PostQR from '../../compontents/uploadqrcontent/PostQR';
-import MenuAppBar from '../../compontents/header/auth/MenuAppBar';
-import FormDialog from '../../compontents/common/input/form/FormDialogAddQR';
-import FormDialogAddQR from '../../compontents/common/input/form/FormDialogAddQR';
-import AlertDialog from '../../compontents/common/AlertDialog';
-import { Backdrop, CircularProgress } from '@mui/material';
+import { createUniver, getUserRole } from '../../api';
+
+import AdminHome from './AdminHome';
+import StudentHome from './StudentHome';
+import TeacherHome from './TeacherHome';
 
 function Home() {
+  const [role, setRole] = React.useState();
+  React.useEffect(()=>{
+    setUserRole();
+  },[])
 
-  // const [open, setOpen]=useState(false)
-  useEffect(()=>{
-    loadQRData();
-  },[]);
-const loadQRData = async ()=>{
-
-  
-}
-  function handleClose() {
+  async function setUserRole() {
+    const role1= await getUserRole();
+        
+    setRole(role1.role);
   }
 
-  return (
-    <>
-    {/* <AlertDialog/> */}
-    <MenuAppBar name={'Home'}/>
-    {/* <Backdrop
-  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-  open={true}
-  onClick={handleClose}
->
-  <CircularProgress color="inherit" />
-</Backdrop> */}
-    <FormDialogAddQR></FormDialogAddQR>
 
-    </>
-  );
+  if(role=="ADMIN"){
+    return (
+      <>
+  <AdminHome/>
+      </>
+    );
+  }
+  else if (role=="TEACHER"){
+    return (
+      <>
+      <TeacherHome></TeacherHome>
+      </>
+    )
+  }
+  else if (role=="STUDENT"){
+    return (
+      <>
+      <StudentHome></StudentHome>
+      </>
+    )
+  }
+  return <></>
+
+
 }
 export default Home
 

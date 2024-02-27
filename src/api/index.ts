@@ -8,7 +8,7 @@ if(type =="Admin"){
     await api.post(`auth/signup`, body);
 
 }else if(type =="Teacher"){
-    await api.post(`auth/singup-teacher`, body);
+    await api.post(`auth/signup-teacher`, body);
 
 }else if(type =="Student"){
     await api.post(`auth/signup-student`, body);
@@ -32,17 +32,39 @@ export const authAccount = async (body:any, type:string) =>{
 
 }
 
-export const createQRCode = async (body:any)=>{
+export const createUniver = async (body:any)=>{
     
-    const responce = await  api.post("/createQRCode",body, {
+    const responce = await  api.post("admin/create-univer",body, {
         headers: {
-          'Content-Type': 'multipart/form-data',
           Authorization: TokenManager.getToken()
       },
       })
       
       return responce.data
 }
+
+
+export const createSubject = async (body:any)=>{
+    
+    const responce = await  api.post("teacher/create-subject",body, {
+        headers: {
+          Authorization: TokenManager.getToken()
+      },
+      })
+      
+      return responce.data
+}
+export const generageTeacherKey = async ()=>{
+    
+    const responce = await  api.post("admin/create-teacher-token",null, {
+        headers: {
+          Authorization: TokenManager.getToken()
+      },
+      })
+      
+      return responce.data
+}
+
 
 
 export const deleteQRCode = async (id:any)=>{
@@ -116,7 +138,6 @@ export const getContentById = async (id:number)=>{
       },
       })
 
-      console.log(responce);
       
       
       return responce.data
@@ -275,12 +296,53 @@ export const getLoggerEntities = async ()=>{
 export const getUserRole = async ()=>{
     
     try{
+        console.log(TokenManager.getToken());
+        
         const responce = await  api.get("auth/user-credential", {
             headers: {
               Authorization: TokenManager.getToken()
           },
           })
         console.log(responce);
+          return responce.data
+    }catch(e){
+            console.log(e);
+            
+    }
+
+}
+
+
+export const getAllSubject = async ()=>{
+    
+    try{
+        console.log(TokenManager.getToken());
+        
+        const responce = await  api.get("teacher/many-subject", {
+            headers: {
+              Authorization: TokenManager.getToken()
+          },
+          })
+          return responce.data
+    }catch(e){
+            console.log(e);
+            
+    }
+
+}
+
+
+export const getCodeForQrSubject = async (id:number, liveTime:number)=>{
+    
+    try{
+    console.log(id);
+        console.log(TokenManager.getToken());
+        
+        const responce = await  api.post(`teacher/create-code-subject?subjectId=${id}&liveTime=${liveTime}`, null,{
+            headers: {
+              Authorization: TokenManager.getToken()
+          },
+          })
           return responce.data
     }catch(e){
             console.log(e);

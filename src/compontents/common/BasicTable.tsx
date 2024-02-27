@@ -18,7 +18,6 @@ function createData(
 
 
 export default function BasicTable({data}:any) {
-    console.log(data);
     
   return (
     <TableContainer component={Paper}>

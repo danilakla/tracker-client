@@ -36,12 +36,10 @@ function initPassword(event:BaseSyntheticEvent) {
 
 async function  authUser(e:any) {
   e.preventDefault()
-  console.log(email, password, role);
   
-  const res =await authAccount({email, password, role},role) 
-  console.log(res);
+  const res:any =await authAccount({email, password, role},role) 
   
-  // localStorage.setItem('access_token', res.data.acc);
+  localStorage.setItem('access_token', res.data.access_token);
 
 
 navigate("/home");
