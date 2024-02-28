@@ -3,7 +3,7 @@ import { createUniver, getUserRole } from '../../api';
 
 import AdminHome from './AdminHome';
 import StudentHome from './StudentHome';
-import TeacherHome from './TeacherHome';
+import { TeacherHome } from './TeacherHome';
 
 function Home() {
   const [role, setRole] = React.useState();

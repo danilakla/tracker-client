@@ -44,6 +44,19 @@ export const createUniver = async (body:any)=>{
 }
 
 
+
+export const setUpAttendence = async (body:any)=>{
+    
+    const responce = await  api.post("student/validate-attendence",body, {
+        headers: {
+          Authorization: TokenManager.getToken()
+      },
+      })
+      
+      return responce.data
+}
+
+
 export const createSubject = async (body:any)=>{
     
     const responce = await  api.post("teacher/create-subject",body, {

@@ -9,9 +9,22 @@ import CreateUniverDialog from '../../compontents/dialog/CreateUniverDialog';
 import GenerateStudentKey from '../../compontents/dialog/GenerateStudentKey';
 import CreateSubjectDialog from '../../compontents/dialog/CreateSubjectDialog';
 import ListSubject from '../../compontents/ListSubject';
+import QRCode from 'react-qr-code';
+import { QrReader } from 'react-qr-reader';
+import { observer } from 'mobx-react-lite';
+import TeacherStore from '../../store/TeacherStore';
 
-function TeacherHome() {
+export const  TeacherHome = observer(()=> {
+    const key:any= TeacherStore.getsubjectCode;
+  const handleScan = (data:any) => {
+    if (data) {
+      console.log('Result: ', data);
+    }
+  }
 
+  const handleError = (err :any)=> {
+    console.error(err);
+  }
 
 
   return (
@@ -21,11 +34,16 @@ function TeacherHome() {
  <CreateSubjectDialog></CreateSubjectDialog>
 
 <ListSubject></ListSubject>
+{key&&
 
+<QRCode
 
+size={800}
+value={key}>
+
+</QRCode>}
+    
     </>
   );
 }
-export default TeacherHome
-
-
+)

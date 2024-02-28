@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getAllSubject } from '../api'
-import CreateCodeQrForSUbject from './dialog/CreateUniverDialog copy';
+import { CreateCodeQrForSUbject } from './dialog/CreateCodeQrForSUbject';
 
 export default function ListSubject() {
     const [subjs, setSubjects]= useState([]);

@@ -1,8 +1,11 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material'
 import React from 'react'
 import { createUniver, getCodeForQrSubject } from '../../api';
+import TeacherStore from '../../store/TeacherStore';
+import { observer } from 'mobx-react-lite';
 
-export default function CreateCodeQrForSUbject(id:any) {
+export const  CreateCodeQrForSUbject= observer((id:any)=> {
+
     const [open, setOpen] = React.useState(false);
 
 
@@ -26,7 +29,9 @@ export default function CreateCodeQrForSUbject(id:any) {
       async function  handleAgree(event:any) {
         try {
           const code = await getCodeForQrSubject(id.id, time);
-            console.log(code);
+          
+          TeacherStore.setSubjectCode(code);
+
             
         } catch (error) {
           alert(error)      
@@ -74,3 +79,4 @@ export default function CreateCodeQrForSUbject(id:any) {
     </div>
   )
 }
+)

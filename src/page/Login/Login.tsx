@@ -1,4 +1,4 @@
-import React, { BaseSyntheticEvent, useState } from 'react'
+import React, { BaseSyntheticEvent, useEffect, useState } from 'react'
 import Header from '../../compontents/header/Header'
 import Title from '../../compontents/title/Title'
 import Form from '../../compontents/form/Form'
@@ -8,9 +8,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import AlertDialog from '../../compontents/common/AlertDialog'
 import { observer } from 'mobx-react-lite'
 import { authAccount } from '../../api'
+import { Html5QrcodeScanner } from 'html5-qrcode'
 const defaultTheme = createTheme();
 
 function Login() {
+
+  
     const navigate = useNavigate();
 
   const [role, setRole]= useState("Admin");
@@ -74,6 +77,8 @@ navigate("/home");
               alignItems: 'center',
             }}
           >
+ 
+
             
             <Typography component="h1" variant="h5">
               Sign in
