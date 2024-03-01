@@ -13,12 +13,12 @@ import QRCode from 'react-qr-code';
 import { QrReader } from 'react-qr-reader';
 import { observer } from 'mobx-react-lite';
 import TeacherStore from '../../store/TeacherStore';
+import { ListSubjectForReview } from '../../compontents/ListSubjecetForReview';
 
 export const  TeacherHome = observer(()=> {
     const key:any= TeacherStore.getsubjectCode;
   const handleScan = (data:any) => {
     if (data) {
-      console.log('Result: ', data);
     }
   }
 
@@ -34,15 +34,17 @@ export const  TeacherHome = observer(()=> {
  <CreateSubjectDialog></CreateSubjectDialog>
 
 <ListSubject></ListSubject>
+<div style={{margin:40}}>
 {key&&
 
 <QRCode
 
-size={800}
+size={400}
 value={key}>
 
 </QRCode>}
-    
+</div>
+<ListSubjectForReview></ListSubjectForReview>
     </>
   );
 }

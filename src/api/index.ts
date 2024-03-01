@@ -56,6 +56,31 @@ export const setUpAttendence = async (body:any)=>{
       return responce.data
 }
 
+export const setUpFlagForReview = async (subjectId:number)=>{
+    
+    const responce = await  api.post(`student/set-attendence-flag/${+subjectId}`,null, {
+        headers: {
+          Authorization: TokenManager.getToken()
+      },
+      })
+      
+      return responce.data
+}
+
+
+export const setUpAcceptStudent = async (body:any)=>{
+    
+    const responce = await  api.post(`teacher/review-acception-student`,body, {
+        headers: {
+          Authorization: TokenManager.getToken()
+      },
+      })
+      
+      return responce.data
+}
+
+
+
 
 export const createSubject = async (body:any)=>{
     
@@ -70,6 +95,18 @@ export const createSubject = async (body:any)=>{
 export const generageTeacherKey = async ()=>{
     
     const responce = await  api.post("admin/create-teacher-token",null, {
+        headers: {
+          Authorization: TokenManager.getToken()
+      },
+      })
+      
+      return responce.data
+}
+
+
+export const getStudentForReview = async (id:any)=>{
+    
+    const responce = await  api.get(`teacher/students-review/${id}`, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -169,7 +206,6 @@ export const deleteContente = async (id:any)=>{
 
 
 export const createPost = async (body:any)=>{
-    console.log(body);
     
     const responce = await  api.post("/createPost",body, {
         headers: {
@@ -186,7 +222,6 @@ export const createPost = async (body:any)=>{
 
 export const deletePost = async (id:any)=>{
     
-    console.log(id);
     
     const responce = await  api.delete(`/deletePost?postId=${id}`, {
         headers: {
@@ -199,7 +234,6 @@ export const deletePost = async (id:any)=>{
 
 
 export const updatePostDesciption = async (id:any, body:any)=>{
-    console.log(id);
     
     const responce = await  api.put(`/updateDescriptionPost?postId=${id}`, body,{
         headers: {
@@ -309,17 +343,14 @@ export const getLoggerEntities = async ()=>{
 export const getUserRole = async ()=>{
     
     try{
-        console.log(TokenManager.getToken());
         
         const responce = await  api.get("auth/user-credential", {
             headers: {
               Authorization: TokenManager.getToken()
           },
           })
-        console.log(responce);
           return responce.data
     }catch(e){
-            console.log(e);
             
     }
 
@@ -329,7 +360,6 @@ export const getUserRole = async ()=>{
 export const getAllSubject = async ()=>{
     
     try{
-        console.log(TokenManager.getToken());
         
         const responce = await  api.get("teacher/many-subject", {
             headers: {
@@ -338,7 +368,24 @@ export const getAllSubject = async ()=>{
           })
           return responce.data
     }catch(e){
-            console.log(e);
+            
+    }
+
+}
+
+
+
+export const getAllSubjectForReview = async ()=>{
+    
+    try{
+        
+        const responce = await  api.get("teacher/subjects-review", {
+            headers: {
+              Authorization: TokenManager.getToken()
+          },
+          })
+          return responce.data
+    }catch(e){
             
     }
 
@@ -348,8 +395,6 @@ export const getAllSubject = async ()=>{
 export const getCodeForQrSubject = async (id:number, liveTime:number)=>{
     
     try{
-    console.log(id);
-        console.log(TokenManager.getToken());
         
         const responce = await  api.post(`teacher/create-code-subject?subjectId=${id}&liveTime=${liveTime}`, null,{
             headers: {
@@ -358,7 +403,6 @@ export const getCodeForQrSubject = async (id:number, liveTime:number)=>{
           })
           return responce.data
     }catch(e){
-            console.log(e);
             
     }
 
