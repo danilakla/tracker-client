@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import MenuAppBar from '../../compontents/header/auth/MenuAppBar'
 import { Button, TextField } from '@mui/material'
 import { startQuize } from '../../api'
-import Quiz from 'react-quiz-component';
+import Quiz from "react-quiz-component"
 
 export const   FormTest = () =>{
   const [testName,setTestName]= useState("")
@@ -12,6 +12,9 @@ export const   FormTest = () =>{
     setdataJson(
     JSON.parse(data.form)
     )
+    console.log(    JSON.parse(data.form)
+    );
+    
      
     }
 
@@ -22,10 +25,10 @@ export const   FormTest = () =>{
               onChange={(event)=>{setTestName(event.target.value)}}
               />
               <Button onClick={initQuize}>Start quize</Button>
-              
-              <Quiz quiz={dataJson} showDefaultResult={false}/>
+              {dataJson&&
+              <Quiz quiz={dataJson} />
+            }
 
-        
         </div>
   )
 }

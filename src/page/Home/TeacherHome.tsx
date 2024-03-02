@@ -10,7 +10,6 @@ import GenerateStudentKey from '../../compontents/dialog/GenerateStudentKey';
 import CreateSubjectDialog from '../../compontents/dialog/CreateSubjectDialog';
 import ListSubject from '../../compontents/ListSubject';
 import QRCode from 'react-qr-code';
-import { QrReader } from 'react-qr-reader';
 import { observer } from 'mobx-react-lite';
 import TeacherStore from '../../store/TeacherStore';
 import { ListSubjectForReview } from '../../compontents/ListSubjecetForReview';

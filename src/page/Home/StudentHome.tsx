@@ -7,7 +7,6 @@ import MenuAppBar from '../../compontents/header/auth/MenuAppBar';
 import { Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
 import CreateUniverDialog from '../../compontents/dialog/CreateUniverDialog';
 import GenerateStudentKey from '../../compontents/dialog/GenerateStudentKey';
-import { QrReader } from 'react-qr-reader';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 
 function StudentHome() {

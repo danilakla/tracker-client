@@ -6,7 +6,7 @@ import { createQuize } from "../../api";
 import MenuAppBar from "../../compontents/header/auth/MenuAppBar";
 
 export const  FormQuiz = ()=> {
-    const [questuions, setQuestuions] = useState([ {question:"", questionType:"text", answerSelectionType:"single",answers:[""],correctAnswer:0, point:'1',
+    const [questuions, setQuestuions] = useState([ {question:"", questionType:"text", answerSelectionType:"single",answers:[""],correctAnswer:"0", point:'1',
     messageForCorrectAnswer: "Correct",
     messageForIncorrectAnswer: "Incorrect",
     explanation: "Result"}]);
@@ -20,7 +20,7 @@ export const  FormQuiz = ()=> {
       const handleAddQuestion = () => {
         
         setQuestuions([
-            ...questuions, {question:"", questionType:"text", answerSelectionType:"single",answers:[""],correctAnswer:0, point:'1',messageForCorrectAnswer: "Correct",
+            ...questuions, {question:"", questionType:"text", answerSelectionType:"single",answers:[""],correctAnswer:"0", point:'1',messageForCorrectAnswer: "Correct",
             messageForIncorrectAnswer: "Incorrect",
             explanation: "Result"}
         ])
@@ -70,7 +70,7 @@ export const  FormQuiz = ()=> {
     function initCorrectAnswear(event: ChangeEvent<HTMLInputElement>, index: number): void {
         const qustionmap : any = questuions.map((e:any, i)=>{
             if(index==i){
-                e.correctAnswer=(+event.target.value)
+                e.correctAnswer=(event.target.value.toString())
             }
             return e;
         })
