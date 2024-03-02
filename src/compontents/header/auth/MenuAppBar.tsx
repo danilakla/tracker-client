@@ -16,6 +16,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import { Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { getUserRole } from '../../../api';
+import { log } from 'console';
 
 export default function MenuAppBar(prop:any) {
   const [auth, setAuth] = React.useState(true);
@@ -29,7 +30,7 @@ export default function MenuAppBar(prop:any) {
   async function setUserRole() {
     const role1= await getUserRole();
     
-    setRole(role1);
+    setRole(role1.role);
   }
 const navigate= useNavigate();
   const toggleDrawer =
@@ -95,13 +96,13 @@ const navigate= useNavigate();
               </ListItemButton>
             </ListItem>
 
-{role=='admin'&&
-      <ListItem key='Admin panel' disablePadding>
-      <ListItemButton onClick={()=>navigate("/admin")}>
+{role=='TEACHER'&&
+      <ListItem key='Generate Quize form' disablePadding>
+      <ListItemButton onClick={()=>navigate("/quize-forum")}>
         <ListItemIcon>
         <InboxIcon/>
         </ListItemIcon>
-        <ListItemText primary='Admin panel' />
+        <ListItemText primary='Generate Quize form' />
       </ListItemButton>
     </ListItem>}
       

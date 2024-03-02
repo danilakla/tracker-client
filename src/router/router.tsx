@@ -4,6 +4,7 @@ import {
 import Registration from "../page/Registration/Registration";
 import Login from "../page/Login/Login";
 import Home from "../page/Home/Home";
+import { FormQuiz } from "../page/Quiz/FormQuiz";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,12 @@ const router = createBrowserRouter([
       path:"/home",
       element: <Home/>
     }
+,
+{
+  path:"/quize-forum",
+  element: <FormQuiz/>
+}
+   
   ]);
 
   export default router;
