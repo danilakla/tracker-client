@@ -81,6 +81,30 @@ export const setUpAcceptStudent = async (body:any)=>{
 
 
 
+export const startQuize = async (name:any)=>{
+    
+    const responce = await  api.get(`quize/get-quize/${name}`, {
+        headers: {
+          Authorization: TokenManager.getToken()
+      },
+      })
+      
+      return responce.data
+}
+
+export const createQuize = async (body:any)=>{
+    
+    const responce = await  api.post(`quize/create-quize`,body, {
+        headers: {
+          Authorization: TokenManager.getToken()
+      },
+      })
+      
+      return responce.data
+}
+
+
+
 
 export const createSubject = async (body:any)=>{
     

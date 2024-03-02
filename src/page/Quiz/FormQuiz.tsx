@@ -2,9 +2,14 @@
 import { TextField } from "@mui/material";
 import { log } from "console";
 import { ChangeEvent, Key, useState } from "react";
+import { createQuize } from "../../api";
+import MenuAppBar from "../../compontents/header/auth/MenuAppBar";
 
 export const  FormQuiz = ()=> {
-    const [questuions, setQuestuions] = useState([ {question:"", questionType:"text", answerSelectionType:"single",answers:[""],correctAnswer:0, point:'1'}]);
+    const [questuions, setQuestuions] = useState([ {question:"", questionType:"text", answerSelectionType:"single",answers:[""],correctAnswer:0, point:'1',
+    messageForCorrectAnswer: "Correct",
+    messageForIncorrectAnswer: "Incorrect",
+    explanation: "Result"}]);
       const [nameQuize, setQuise ] = useState()
     
       const handleQuizChange = (event: { target: { name: any; value: any; }; }) => {
@@ -15,7 +20,9 @@ export const  FormQuiz = ()=> {
       const handleAddQuestion = () => {
         
         setQuestuions([
-            ...questuions, {question:"", questionType:"text", answerSelectionType:"single",answers:[""],correctAnswer:0, point:'1'}
+            ...questuions, {question:"", questionType:"text", answerSelectionType:"single",answers:[""],correctAnswer:0, point:'1',messageForCorrectAnswer: "Correct",
+            messageForIncorrectAnswer: "Incorrect",
+            explanation: "Result"}
         ])
       };
     
@@ -72,12 +79,27 @@ export const  FormQuiz = ()=> {
 
     }
 
-      const handleGenerateJSON = () => {
-        console.log(JSON.stringify(questuions, null, 2));
+       const handleGenerateJSON = async () => {
+        const data = await createQuize({
+            name:nameQuize,
+            formtest:     JSON.stringify({
+                quizTitle:nameQuize,
+                quizSynopsis:"Test",
+                questions:questuions
+            })
+        })
+        JSON.stringify({
+            quizTitle:nameQuize,
+            quizSynopsis:"Test",
+            questions:questuions
+        })
+        console.log(JSON.stringify(data, null, 2));
       };
     
       return (
+
         <div>
+       <MenuAppBar></MenuAppBar> 
           <h1>Quiz Form</h1>
     
           <label>
@@ -124,7 +146,7 @@ export const  FormQuiz = ()=> {
           ))}
     
           <button onClick={handleAddQuestion}>Add Question</button>
-          <button onClick={handleGenerateJSON}>Generate JSON</button>
+          <button onClick={handleGenerateJSON}>Save  Quize</button>
         </div>
       );
 }

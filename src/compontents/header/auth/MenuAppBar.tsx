@@ -105,7 +105,15 @@ const navigate= useNavigate();
         <ListItemText primary='Generate Quize form' />
       </ListItemButton>
     </ListItem>}
-      
+    {role=='STUDENT'&&
+      <ListItem key='Pass the Quize form' disablePadding>
+      <ListItemButton onClick={()=>navigate("/test-form")}>
+        <ListItemIcon>
+        <InboxIcon/>
+        </ListItemIcon>
+        <ListItemText primary='Pass a Quize form' />
+      </ListItemButton>
+    </ListItem>}
 
         </List>
         <Divider />

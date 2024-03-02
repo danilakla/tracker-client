@@ -5,6 +5,7 @@ import Registration from "../page/Registration/Registration";
 import Login from "../page/Login/Login";
 import Home from "../page/Home/Home";
 import { FormQuiz } from "../page/Quiz/FormQuiz";
+import { FormTest } from "../page/FormQuizeStudent/FormTest";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +24,12 @@ const router = createBrowserRouter([
 {
   path:"/quize-forum",
   element: <FormQuiz/>
+}
+
+,
+{
+  path:"/test-form",
+  element: <FormTest/>
 }
    
   ]);
