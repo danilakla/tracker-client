@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { getAllSubject } from '../api'
 import { CreateCodeQrForSUbject } from './dialog/CreateCodeQrForSUbject';
+import { Card, CardContent, Typography, CardActions, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { CalculatePrecentOFAvgAttendForm } from './common/CalculatePrecentOFAvgAttendForm';
 
 export default function ListSubject() {
+    const navigate = useNavigate()
     const [subjs, setSubjects]= useState([]);
 useEffect(()=>{
     initSubject();
@@ -21,14 +25,39 @@ return (
         }
 
         return (
-        <div>
-      sub name:  {e.subject_name}
-       time: {e.createdAt}
+ 
+        <Card sx={{ maxWidth: 340, border:1, borderColor:"gray", margin:2}}>
+      <CardContent>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
         number of student: {e.numberOfStudent}
-       course: {e.course}
+        </Typography>
+        <Typography variant="h5" component="div">
+       <span style={{fontSize:14}}> Name of subject:</span> {e.subject_name}
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        course: {e.course}
+        </Typography>
+        <Typography variant="body2">
         term : {e.term}
-        <CreateCodeQrForSUbject id={e.id}/>
+            <br/>
+          time: {e.createdAt}
+
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <div style={{display:'flex', justifyContent:'center'}}>
+      <CreateCodeQrForSUbject id={e.id}/>
+      <CalculatePrecentOFAvgAttendForm id={e.id} amountStudent={e.numberOfStudent} />
+<Button variant="outlined" onClick={()=>(navigate(`/StudentAttendence?id=${e.id}`))}>
+        show
+        </Button>
         </div>
+      </CardActions>
+    </Card>
+     
+
+
+
         )
     })}
     </>

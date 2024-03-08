@@ -1,7 +1,7 @@
 
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { log } from "console";
-import { ChangeEvent, Key, useState } from "react";
+import { ChangeEvent, Key, useRef, useState } from "react";
 import { createQuize } from "../../api";
 import MenuAppBar from "../../compontents/header/auth/MenuAppBar";
 
@@ -11,7 +11,13 @@ export const  FormQuiz = ()=> {
     messageForIncorrectAnswer: "Incorrect",
     explanation: "Result"}]);
       const [nameQuize, setQuise ] = useState()
-    
+      const handleScroll = (percent:number) => {
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'smooth',
+        });
+        
+      };
       const handleQuizChange = (event: { target: { name: any; value: any; }; }) => {
         const { name, value } = event.target;
         setQuise(value)
@@ -24,6 +30,7 @@ export const  FormQuiz = ()=> {
             messageForIncorrectAnswer: "Incorrect",
             explanation: "Result"}
         ])
+        handleScroll(5);
       };
     
       const handleQuestionChange = (event:any, index: number) => {
@@ -93,24 +100,26 @@ export const  FormQuiz = ()=> {
             quizSynopsis:"Test",
             questions:questuions
         })
-        console.log(JSON.stringify(data, null, 2));
+        window. location. reload(); 
+
       };
     
       return (
+<>
+       <MenuAppBar name={'Quiz Generation Form '} ></MenuAppBar> 
+       <div style={{justifyContent:'center', display:'flex', flexDirection:'column'}}>
 
-        <div>
-       <MenuAppBar></MenuAppBar> 
-          <h1>Quiz Form</h1>
-    
-          <label>
-            Quiz Title:
+    <div style={{display:'flex', flexDirection:"column", justifyContent:'center'}}>
+              <h1>Quize Title:</h1>
             <TextField
               type="text"
               name="quizTitle"
               onChange={handleQuizChange}
             />
-          </label>
-    
+</div>
+
+        <div style={{border:1, borderColor:'gray', margin:10}}> 
+          
           <h3>Questions:</h3>
           {questuions.map((q:any, index)=> (
             <div>
@@ -122,19 +131,21 @@ export const  FormQuiz = ()=> {
               </label>
     
               <h4>Answers:</h4>
+              <div style={{display:'flex', flexDirection:'column', margin:10}}>
               {q.answers.map((answer:string, answerIndex: number) => (
-                <label key={answerIndex}>
-                  Answer {answerIndex + 1}:
+                <label key={answerIndex} style={{margin:10}}>
+                   {answerIndex + 1}:
                   <input
                     type="text"
                     onChange={(event) => handleAnswerChange(event, index, answerIndex)}
                   />
                 </label>
               ))}
+              </div>
     
-              <button onClick={() => handleAddAnswer(index)}>Add Answer</button>
+              <Button onClick={() => handleAddAnswer(index)}>Add Answer</Button>
               <div></div>
-              init correct answear
+                Specify correct answear
               <input
                     type="number"
                     onChange={(event) => initCorrectAnswear(event, index)}
@@ -144,10 +155,12 @@ export const  FormQuiz = ()=> {
 
             
           ))}
-    
-          <button onClick={handleAddQuestion}>Add Question</button>
-          <button onClick={handleGenerateJSON}>Save  Quize</button>
-        </div>
+    </div>
+          <Button onClick={handleAddQuestion}>Add Question</Button>
+          <Button onClick={handleGenerateJSON}>Save  Quize</Button>
+
+          </div>
+          </>
       );
 }
 

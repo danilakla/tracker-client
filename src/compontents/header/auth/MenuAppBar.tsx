@@ -55,48 +55,17 @@ const navigate= useNavigate();
         onKeyDown={toggleDrawer( false)}
       >
         <List>
-          {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))} */}
-
-
-      <ListItem key='User QR-code' disablePadding>
-              <ListItemButton onClick={()=>navigate("/home")}>
-                <ListItemIcon>
-                <InboxIcon/>
-                </ListItemIcon>
-                <ListItemText primary='User QR-code' />
-              </ListItemButton>
-            </ListItem>
-
-            
-      <ListItem key='User Post' disablePadding>
-              <ListItemButton onClick={()=>navigate("/posts")}>
-                <ListItemIcon>
-                <InboxIcon/>
-                </ListItemIcon>
-                <ListItemText primary='User Post' />
-              </ListItemButton>
-            </ListItem>
-
-            
-            <ListItem key='News Post' disablePadding>
-              <ListItemButton onClick={()=>navigate("/newposts")}>
-                <ListItemIcon>
-                <InboxIcon/>
-                </ListItemIcon>
-                <ListItemText primary='News Post' />
-              </ListItemButton>
-            </ListItem>
-
+ 
+        <ListItem key='Home' disablePadding>
+      <ListItemButton onClick={()=>navigate("/home")}>
+        <ListItemIcon>
+        <InboxIcon/>
+        </ListItemIcon>
+        <ListItemText primary='Home' />
+      </ListItemButton>
+    </ListItem>
 {role=='TEACHER'&&
+<>
       <ListItem key='Generate Quize form' disablePadding>
       <ListItemButton onClick={()=>navigate("/quize-forum")}>
         <ListItemIcon>
@@ -104,7 +73,22 @@ const navigate= useNavigate();
         </ListItemIcon>
         <ListItemText primary='Generate Quize form' />
       </ListItemButton>
-    </ListItem>}
+    </ListItem>
+
+    
+      <ListItem key='show-review-student' disablePadding>
+      <ListItemButton onClick={()=>navigate("/show-review-student")}>
+        <ListItemIcon>
+        <InboxIcon/>
+        </ListItemIcon>
+        <ListItemText primary='Show review students' />
+      </ListItemButton>
+    </ListItem>
+    
+
+    </>}
+
+
     {role=='STUDENT'&&
       <ListItem key='Pass the Quize form' disablePadding>
       <ListItemButton onClick={()=>navigate("/test-form")}>
@@ -114,6 +98,16 @@ const navigate= useNavigate();
         <ListItemText primary='Pass a Quize form' />
       </ListItemButton>
     </ListItem>}
+{/* 
+    {role=='ADMIN'&&
+      <ListItem key='Home' disablePadding>
+      <ListItemButton onClick={()=>navigate("/home")}>
+        <ListItemIcon>
+        <InboxIcon/>
+        </ListItemIcon>
+        <ListItemText primary='Home' />
+      </ListItemButton>
+    </ListItem>} */}
 
         </List>
         <Divider />

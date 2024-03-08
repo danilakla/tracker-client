@@ -1,15 +1,15 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material'
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
 import React from 'react'
-import { createUniver, getCodeForQrSubject } from '../../api';
+import { getAmountStudentAttend, getCodeForQrSubject } from '../../api';
 import TeacherStore from '../../store/TeacherStore';
-import { observer } from 'mobx-react-lite';
 
-export const  CreateCodeQrForSUbject= observer((id:any)=> {
+export const   CalculatePrecentOFAvgAttendForm = (param:any)=>{
 
     const [open, setOpen] = React.useState(false);
 
+    const [procentStudent, setprocentStudent] = React.useState(0);
 
-    const [time, setTime] = React.useState(0);
+    const [passLecture, setpassLecture] = React.useState(0);
 
     const handleClickOpen = () => {
       setOpen(true);
@@ -23,16 +23,18 @@ export const  CreateCodeQrForSUbject= observer((id:any)=> {
   
   
     function initNam(event:any): void {
-        setTime(event.target.value)
+        setpassLecture(event.target.value)
       }
     
       async function  handleAgree(event:any) {
         try {
-          const code = await getCodeForQrSubject(id.id, time);
-          
-          TeacherStore.setSubjectCode(code);
+            const mustBeStudent = passLecture*param.amountStudent;
 
-            
+            const countAttende= (await getAmountStudentAttend(param.id)).count.attendanceCount
+          console.log(countAttende);
+          
+            const procentOfStudent=(countAttende*100)/mustBeStudent;
+            setprocentStudent(procentOfStudent)
         } catch (error) {
           alert(error)      
         }
@@ -41,7 +43,8 @@ export const  CreateCodeQrForSUbject= observer((id:any)=> {
     <div>
 
 <Button variant="outlined" onClick={handleClickOpen}>
-      qrcode</Button>
+      Calculate
+        </Button>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -53,7 +56,7 @@ export const  CreateCodeQrForSUbject= observer((id:any)=> {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Put the name of university to placeholder
+            Put the count of pass lactures
 
             <TextField
                 margin="normal"
@@ -67,15 +70,19 @@ export const  CreateCodeQrForSUbject= observer((id:any)=> {
                 autoFocus
               />
           </DialogContentText>
+          Porcent: {procentStudent} %
+
         </DialogContent>
+        
         <DialogActions>
           <Button onClick={handleClose}>Disagree</Button>
           <Button onClick={handleAgree} autoFocus>
-            Agree
+            Calculate
           </Button>
+
         </DialogActions>
+
       </Dialog>
     </div>
   )
 }
-)

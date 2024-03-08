@@ -81,6 +81,29 @@ export const setUpAcceptStudent = async (body:any)=>{
 
 
 
+
+export const getStudentBySubjectIdAttendence = async (id:any)=>{
+    
+    const responce = await  api.get(`teacher/student-by-subj/${id}`, {
+        headers: {
+          Authorization: TokenManager.getToken()
+      },
+      })
+      
+      return responce.data
+}
+
+
+export const getAmountStudentAttend = async (id:any)=>{
+    
+    const responce = await  api.get(`teacher/amount-student-attend/${id}`, {
+        headers: {
+          Authorization: TokenManager.getToken()
+      },
+      })
+      
+      return responce.data
+}
 export const startQuize = async (name:any)=>{
     
     const responce = await  api.get(`quize/get-quize/${name}`, {

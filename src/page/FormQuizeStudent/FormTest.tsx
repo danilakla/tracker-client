@@ -20,14 +20,20 @@ export const   FormTest = () =>{
 
     return (
     <div>
-               <MenuAppBar></MenuAppBar> 
+               <MenuAppBar name="Quize Page"></MenuAppBar> 
+     <div style={{display:'flex', justifyContent:'center', flexDirection:'column'}}>
                <TextField
               onChange={(event)=>{setTestName(event.target.value)}}
               />
+<div></div>
               <Button onClick={initQuize}>Start quize</Button>
+              <div style={{display:'flex', justifyContent:'center'}}>
+
               {dataJson&&
               <Quiz quiz={dataJson} />
             }
+</div>
+              </div>
 
         </div>
   )

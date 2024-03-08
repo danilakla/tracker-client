@@ -1,9 +1,11 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material'
 import React from 'react'
 import { createSubject, createUniver } from '../../api';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateSubjectDialog() {
     const [open, setOpen] = React.useState(false);
+    const navigate =useNavigate()
 
 
     const [subjectName, setsubjectName] = React.useState('');
@@ -49,6 +51,11 @@ export default function CreateSubjectDialog() {
       async function  handleAgree(event:any) {
         try {
           const data = await createSubject({subjectName, course, term, numberOfStudent, numberPassLecture})
+          console.log(data);
+          
+          window. location. reload(); 
+        
+        
         } catch (error) {
           alert(error)      
         }

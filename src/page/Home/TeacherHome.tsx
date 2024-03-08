@@ -30,20 +30,25 @@ export const  TeacherHome = observer(()=> {
     <>
     <MenuAppBar name={'TeacherPage'}/>
 
- <CreateSubjectDialog></CreateSubjectDialog>
+<div style={{display:'flex',justifyContent:"center", margin:20}}> 
+
+<CreateSubjectDialog></CreateSubjectDialog>
+</div>
+
+<div style={{display:'flex',justifyContent:"center", flexWrap:'wrap'}}> 
 
 <ListSubject></ListSubject>
-<div style={{margin:40}}>
+</div>
+<div style={{margin:40, display:'flex',justifyContent:"center"}}>
 {key&&
 
 <QRCode
 
-size={400}
+size={600}
 value={key}>
 
 </QRCode>}
 </div>
-<ListSubjectForReview></ListSubjectForReview>
     </>
   );
 }

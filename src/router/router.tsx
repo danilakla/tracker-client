@@ -6,6 +6,8 @@ import Login from "../page/Login/Login";
 import Home from "../page/Home/Home";
 import { FormQuiz } from "../page/Quiz/FormQuiz";
 import { FormTest } from "../page/FormQuizeStudent/FormTest";
+import { StudentForReviewPage } from "../page/StudentForReviewPage";
+import StudentAttendence from "../page/CalculatPage/StudentAttendence";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +33,20 @@ const router = createBrowserRouter([
   path:"/test-form",
   element: <FormTest/>
 }
+
+,
+{
+  path:"/show-review-student",
+  element: <StudentForReviewPage/>
+}
+
+,
+{
+  path:"/StudentAttendence",
+  element: <StudentAttendence/>
+}
+
+
    
   ]);
 
