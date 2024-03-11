@@ -46,7 +46,7 @@ return (
       </CardContent>
       <CardActions>
         <div style={{display:'flex', justifyContent:'center'}}>
-      <CreateCodeQrForSUbject id={e.id}/>
+      <CreateCodeQrForSUbject amountStudent={e.numberOfStudent}  id={e.id}/>
       <CalculatePrecentOFAvgAttendForm id={e.id} amountStudent={e.numberOfStudent} />
 <Button variant="outlined" onClick={()=>(navigate(`/StudentAttendence?id=${e.id}`))}>
         show

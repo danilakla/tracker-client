@@ -4,6 +4,8 @@ class TeacherStore{
 
 
     subjectCode = "";
+    amountStudent =0;
+    currentAmount =0;
     constructor(){
             makeAutoObservable(this)
     }
@@ -12,8 +14,23 @@ class TeacherStore{
         return this.subjectCode;
     }
 
+    get getCurrentAmount(){
+        return this.currentAmount;
+    }
+
+    
+    get getamountStudent(){
+        return this.amountStudent;
+    }
     setSubjectCode(value:any){
             this.subjectCode = value;
+    }
+    setAmountSelectedStudent(value:any){
+        this.amountStudent= value
+    }
+
+    incrementStudentCount(){
+        this.currentAmount=this.currentAmount+1; 
     }
 
 }

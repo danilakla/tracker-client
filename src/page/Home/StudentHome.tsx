@@ -8,9 +8,11 @@ import { Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogConten
 import CreateUniverDialog from '../../compontents/dialog/CreateUniverDialog';
 import GenerateStudentKey from '../../compontents/dialog/GenerateStudentKey';
 import { Html5QrcodeScanner } from 'html5-qrcode';
+import { io } from 'socket.io-client';
 
 function StudentHome() {
 const [flag, setFlag]= useState(false);
+const [socket, setSocket]:any= useState();
 const [subjectId, setSubjectId]= useState(0);
   const[scanResult, setScanResult]= useState(null)
 useEffect(()=>{
@@ -31,7 +33,26 @@ useEffect(()=>{
     setScanResult(result);
   
   if (!!result) {
-   const data=  await setUpAttendence({code:result, time:new Date()})
+   try {
+
+    const data=  await setUpAttendence({code:result, time:new Date()})
+
+
+    const socket = await io('https://192.168.31.30:3333');
+    console.log(socket);
+    
+    setSocket(socket)
+    // Handle events or perform any necessary actions
+    socket.on('connect', () => {
+      console.log('Socket connected');
+      // Additional logic when the connection is established
+    });
+
+    socket.on('disconnect', () => {
+      console.log('Socket disconnected');
+      // Additional logic when the connection is disconnected
+    });
+    socket.emit('counter',result )
    alert(data.code) 
    if(data.status==400){
       alert(data.code+data.status);
@@ -40,7 +61,11 @@ useEffect(()=>{
       setFlag(true);
     }
     
+   } catch (error) {
+    
+   }
   }
+  
 
 }   
 },[])

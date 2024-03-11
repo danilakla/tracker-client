@@ -3,10 +3,12 @@ import React from 'react'
 import { createUniver, getCodeForQrSubject } from '../../api';
 import TeacherStore from '../../store/TeacherStore';
 import { observer } from 'mobx-react-lite';
+import { io } from 'socket.io-client';
 
 export const  CreateCodeQrForSUbject= observer((id:any)=> {
 
     const [open, setOpen] = React.useState(false);
+    const [socket, setSocket]:any[] = React.useState();
 
 
     const [time, setTime] = React.useState(0);
@@ -28,8 +30,30 @@ export const  CreateCodeQrForSUbject= observer((id:any)=> {
     
       async function  handleAgree(event:any) {
         try {
-          const code = await getCodeForQrSubject(id.id, time);
           
+          const code = await getCodeForQrSubject(id.id, time);
+          const socket = await io('https://192.168.31.30:3333',{
+            query:{code}
+          });
+          console.log(socket);
+          TeacherStore.setAmountSelectedStudent(id.amountStudent);
+          setSocket(socket)
+          // Handle events or perform any necessary actions
+          socket.on('connect', () => {
+            console.log('Socket connected');
+            // Additional logic when the connection is established
+          });
+      
+          socket.on('disconnect', () => {
+            console.log('Socket disconnected');
+            // Additional logic when the connection is disconnected
+          });
+          socket.on('incement',(data:any)=>{
+            console.log(data);
+            TeacherStore.incrementStudentCount();
+            
+            
+          })
           TeacherStore.setSubjectCode(code);
 
             

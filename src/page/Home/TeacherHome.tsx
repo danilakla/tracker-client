@@ -39,6 +39,12 @@ export const  TeacherHome = observer(()=> {
 
 <ListSubject></ListSubject>
 </div>
+<div style={{display:"flex", justifyContent:'center'}}>
+  <h1>
+ student count: {TeacherStore.getCurrentAmount} / {TeacherStore.getamountStudent}
+
+  </h1>
+</div>
 <div style={{margin:40, display:'flex',justifyContent:"center"}}>
 {key&&
 
