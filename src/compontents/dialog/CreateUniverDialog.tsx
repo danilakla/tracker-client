@@ -26,7 +26,8 @@ export default function CreateUniverDialog() {
       async function  handleAgree(event:any) {
         try {
           const univer = await createUniver({univerName:nameUniver});
-          
+          alert("success")      
+
         } catch (error) {
           alert(error)      
         }
@@ -44,7 +45,6 @@ export default function CreateUniverDialog() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -56,7 +56,6 @@ export default function CreateUniverDialog() {
                 fullWidth
                 id="email"
                 onChange={initNam}
-                label="Email Address"
                 name="email"
                 autoComplete="email"
                 autoFocus

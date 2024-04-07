@@ -45,16 +45,21 @@ function initStudentnUm(event:BaseSyntheticEvent) {
 
 async function  registerUser(e:any) {
   e.preventDefault();
+  try {
     await registrationAccount({
-role,
-email,
-password,
-firstName,
-lastName,
-studentNumber,
-teacherSecretKey
-    }, role);
-    navigate('/login')
+      role,
+      email,
+      password,
+      firstName,
+      lastName,
+      studentNumber,
+      teacherSecretKey
+          }, role);
+          navigate('/login')
+  } catch (error) {
+    alert("400 pls, check the parameter")
+  }
+
 
 }
 

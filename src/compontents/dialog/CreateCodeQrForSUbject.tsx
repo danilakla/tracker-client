@@ -32,7 +32,7 @@ export const  CreateCodeQrForSUbject= observer((id:any)=> {
         try {
           
           const code = await getCodeForQrSubject(id.id, time);
-          const socket = await io('https://192.168.31.30:3333',{
+          const socket = await io('https://192.168.1.5:3333',{
             query:{code}
           });
           console.log(socket);
@@ -73,11 +73,10 @@ export const  CreateCodeQrForSUbject= observer((id:any)=> {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Put the name of university to placeholder
+            Put the livetime of qrcode in second
 
             <TextField
                 margin="normal"
@@ -85,7 +84,6 @@ export const  CreateCodeQrForSUbject= observer((id:any)=> {
                 fullWidth
                 id="email"
                 onChange={initNam}
-                label="Email Address"
                 name="email"
                 autoComplete="email"
                 autoFocus

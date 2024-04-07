@@ -38,7 +38,7 @@ useEffect(()=>{
     const data=  await setUpAttendence({code:result, time:new Date()})
 
 
-    const socket = await io('https://192.168.31.30:3333');
+    const socket = await io('https://192.168.1.5:3333');
     console.log(socket);
     
     setSocket(socket)
@@ -52,7 +52,9 @@ useEffect(()=>{
       console.log('Socket disconnected');
       // Additional logic when the connection is disconnected
     });
-    socket.emit('counter',result )
+    if(data.code=="success"){
+      socket.emit('counter',result )
+    }
    alert(data.code) 
    if(data.status==400){
       alert(data.code+data.status);

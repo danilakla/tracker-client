@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import MenuAppBar from '../../compontents/header/auth/MenuAppBar'
-import { useLocation } from 'react-router-dom';
-import { getStudentBySubjectIdAttendence } from '../../api';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { getStudentBySubjectIdAttendence, getUserRole } from '../../api';
 import { Card, CardContent, Typography, CardActions } from '@mui/material';
 import { CreateCodeQrForSUbject } from '../../compontents/dialog/CreateCodeQrForSUbject';
 
@@ -13,7 +13,21 @@ const [students, setStudents] = useState([]);
     const queryParams = new URLSearchParams(location.search);
     const paramValue = queryParams.get('id');
     loadStudentBySubject(paramValue)
+    setUserRole();
+
   },[])
+
+  const navigate = useNavigate()
+  async function setUserRole() {
+    try {
+        const role1= await getUserRole();
+        if(role1.role!="TEACHER") navigate("login")
+    } catch (error) {
+      
+      navigate('/login')
+    }
+  
+  }
   async function loadStudentBySubject(id:any){
     const students =  await getStudentBySubjectIdAttendence(id);
       setStudents(students)

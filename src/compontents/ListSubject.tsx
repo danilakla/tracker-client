@@ -18,6 +18,9 @@ async function initSubject() {
 
     
 }
+if(!subjs){
+  return(<><h1>empty list</h1></>)
+}
 return (
     <>
     {subjs.map((e:any)=>{

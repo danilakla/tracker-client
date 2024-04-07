@@ -52,7 +52,6 @@ export const   CalculatePrecentOFAvgAttendForm = (param:any)=>{
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -64,7 +63,6 @@ export const   CalculatePrecentOFAvgAttendForm = (param:any)=>{
                 fullWidth
                 id="email"
                 onChange={initNam}
-                label="Email Address"
                 name="email"
                 autoComplete="email"
                 autoFocus

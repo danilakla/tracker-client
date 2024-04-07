@@ -38,14 +38,19 @@ function initPassword(event:BaseSyntheticEvent) {
 
 
 async function  authUser(e:any) {
-  e.preventDefault()
+  try {
+    e.preventDefault()
   
   const res:any =await authAccount({email, password, role},role) 
   
   localStorage.setItem('access_token', res.data.access_token);
 
 
-navigate("/home");
+navigate("/home");  
+  } catch (error) {
+    alert("400, check the parameter")
+  }
+
  
 }
   return (

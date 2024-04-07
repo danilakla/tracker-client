@@ -1,9 +1,10 @@
 
 import { Button, TextField } from "@mui/material";
 import { log } from "console";
-import { ChangeEvent, Key, useRef, useState } from "react";
-import { createQuize } from "../../api";
+import { ChangeEvent, Key, useEffect, useRef, useState } from "react";
+import { createQuize, getUserRole } from "../../api";
 import MenuAppBar from "../../compontents/header/auth/MenuAppBar";
+import { useNavigate } from "react-router-dom";
 
 export const  FormQuiz = ()=> {
     const [questuions, setQuestuions] = useState([ {question:"", questionType:"text", answerSelectionType:"single",answers:[""],correctAnswer:"0", point:'1',
@@ -18,6 +19,20 @@ export const  FormQuiz = ()=> {
         });
         
       };
+      useEffect(()=>{
+        setUserRole();
+      },[])
+      const navigate = useNavigate()
+  async function setUserRole() {
+    try {
+        const role1= await getUserRole();
+        if(role1.role!="TEACHER") navigate("login")
+    } catch (error) {
+      
+      navigate('/login')
+    }
+  
+  }
       const handleQuizChange = (event: { target: { name: any; value: any; }; }) => {
         const { name, value } = event.target;
         setQuise(value)
@@ -87,7 +102,8 @@ export const  FormQuiz = ()=> {
     }
 
        const handleGenerateJSON = async () => {
-        const data = await createQuize({
+        try {
+          const data = await createQuize({
             name:nameQuize,
             formtest:     JSON.stringify({
                 quizTitle:nameQuize,
@@ -101,6 +117,10 @@ export const  FormQuiz = ()=> {
             questions:questuions
         })
         window. location. reload(); 
+        } catch (error) {
+          alert('error has occured, 403')
+        }
+
 
       };
     

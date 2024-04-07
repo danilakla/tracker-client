@@ -1,16 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import { getAllSubject, getAllSubjectForReview, getStudentForReview, setUpAcceptStudent } from '../api'
+import { getAllSubject, getAllSubjectForReview, getStudentForReview, getUserRole, setUpAcceptStudent } from '../api'
 import { CreateCodeQrForSUbject } from './dialog/CreateCodeQrForSUbject';
 import { Button, Card, CardActions, CardContent, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export const  ListSubjectForReview=()=> {
     const [subjs, setSubjects]= useState([]);
     const [students, setStudents]= useState([]);
     const [subjIdCurent, setsubjIdCurent]= useState();
+    const [role, setRole] = React.useState();
+
 useEffect(()=>{
     initSubject();
-},[])
+    setUserRole();
 
+},[])
+const navigate = useNavigate()
+  async function setUserRole() {
+    try {
+        const role1= await getUserRole();
+        if(role1.role!="TEACHER") navigate("login")
+    } catch (error) {
+      
+      navigate('/login')
+    }
+  
+  }
 async function acceptuinStudent(params:any) {
     
     const data = await setUpAcceptStudent({
@@ -35,9 +50,14 @@ async function agreeStudent(subjectId:any, studentId:any) {
 
 }
 async function initSubject() {
-    const data = await getAllSubjectForReview();
+    try {
+          const data = await getAllSubjectForReview();
     
-    setSubjects(data)
+    setSubjects(data)  
+    } catch (error) {
+        alert("not valid token")
+    }
+
 
     
 }
@@ -47,7 +67,9 @@ async function getStudentMiss(id:any) {
     setStudents(data)
     setsubjIdCurent(id);
 }
-
+if(!subjs){
+    return(<><h1>empty list</h1></>)
+}
 return (
     <>
     {subjs.map((subjdata:any)=>{

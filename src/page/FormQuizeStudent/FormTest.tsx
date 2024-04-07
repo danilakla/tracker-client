@@ -1,20 +1,43 @@
 import React, { useState } from 'react'
 import MenuAppBar from '../../compontents/header/auth/MenuAppBar'
 import { Button, TextField } from '@mui/material'
-import { startQuize } from '../../api'
+import { getUserRole, startQuize } from '../../api'
 import Quiz from "react-quiz-component"
+import { useNavigate } from 'react-router-dom'
 
 export const   FormTest = () =>{
   const [testName,setTestName]= useState("")
   const [dataJson,setdataJson]= useState()
+
+  const [role, setRole] = React.useState();
+  React.useEffect(()=>{
+    setUserRole();
+  },[])
+const navigate = useNavigate()
+  async function setUserRole() {
+    try {
+        const role1= await getUserRole();
+        if(role1.role!="STUDENT") navigate("login")
+    } catch (error) {
+      
+      navigate('/login')
+    }
+  
+  }
   async  function initQuize() {
-    const data = await  startQuize(testName);
-    setdataJson(
-    JSON.parse(data.form)
-    )
-    console.log(    JSON.parse(data.form)
-    );
-    
+
+    try {
+      const data = await  startQuize(testName);
+      setdataJson(
+      JSON.parse(data.form)
+      )
+      console.log(    JSON.parse(data.form)
+      );
+      
+    } catch (error) {
+      alert("specify correct name")
+    }
+ 
      
     }
 

@@ -26,13 +26,19 @@ export default function MenuAppBar(prop:any) {
   React.useEffect(()=>{
     setUserRole();
   },[])
+  const navigate= useNavigate();
 
   async function setUserRole() {
+    try {
+      
+  
     const role1= await getUserRole();
-    
     setRole(role1.role);
+
+  } catch (error) {
+      navigate('/login')
   }
-const navigate= useNavigate();
+  }
   const toggleDrawer =
     ( open: boolean) =>
 
