@@ -26,15 +26,20 @@ export const  CreateCodeQrForSUbject= observer((id:any)=> {
   
     function initNam(event:any): void {
         setTime(event.target.value)
+
+    
       }
     
       async function  handleAgree(event:any) {
         try {
-          
+          console.log();
+
+          if(!Number.isInteger(+time)) throw new Error("time is not a number");
           const code = await getCodeForQrSubject(id.id, time);
-          const socket = await io('https://192.168.1.5:3333',{
+          const socket = await io( process.env.REACT_APP_SERVER||'https://localhost:3333', {
             query:{code}
           });
+
           console.log(socket);
           TeacherStore.setAmountSelectedStudent(id.amountStudent);
           setSocket(socket)

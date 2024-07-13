@@ -1,7 +1,7 @@
 import axios from 'axios';
-
+console.log( process.env.REACT_APP_SERVER);
 const api = axios.create({
-  baseURL: 'https://192.168.1.5:3333', // localhost Replace with your backend URL docker
+  baseURL: process.env.REACT_APP_SERVER
 });
 
 export default api

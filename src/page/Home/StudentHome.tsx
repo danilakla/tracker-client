@@ -38,7 +38,7 @@ useEffect(()=>{
     const data=  await setUpAttendence({code:result, time:new Date()})
 
 
-    const socket = await io('https://192.168.1.5:3333');
+    const socket = await io(process.env.REACT_APP_SERVER||'https://localhost:3333');
     console.log(socket);
     
     setSocket(socket)

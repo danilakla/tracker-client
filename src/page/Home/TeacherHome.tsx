@@ -4,7 +4,7 @@ import axios from 'axios';
 import { createUniver } from '../../api';
 import MenuAppBar from '../../compontents/header/auth/MenuAppBar';
 
-import { Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
+import { Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slider, TextField } from '@mui/material';
 import CreateUniverDialog from '../../compontents/dialog/CreateUniverDialog';
 import GenerateStudentKey from '../../compontents/dialog/GenerateStudentKey';
 import CreateSubjectDialog from '../../compontents/dialog/CreateSubjectDialog';
@@ -20,6 +20,11 @@ export const  TeacherHome = observer(()=> {
     if (data) {
     }
   }
+  const [sliderValue, setSliderValue] = useState(500);
+
+  const handleSliderChange = (event:any, newValue:any) => {
+    setSliderValue(newValue);
+  };
 
   const handleError = (err :any)=> {
     console.error(err);
@@ -47,13 +52,28 @@ export const  TeacherHome = observer(()=> {
 </div>
 <div style={{margin:40, display:'flex',justifyContent:"center"}}>
 {key&&
+<>
+<div>
+<div>
+
+
+<Slider       value={sliderValue}
+        onChange={handleSliderChange}
+         defaultValue={600} max={2000} min={100} aria-label="Default" valueLabelDisplay="auto" />
+</div>
+
+<div>
 
 <QRCode
 
-size={600}
+size={sliderValue}
 value={key}>
 
-</QRCode>}
+</QRCode>
+</div>
+</div>
+</>
+}
 </div>
     </>
   );

@@ -26,13 +26,14 @@
     "react-quiz-component": "^0.8.1",
     "react-router-dom": "^6.16.0",
     "react-scripts": "^5.0.1",
+    "react-scrollama": "^2.3.3",
     "socket.io-client": "^4.7.4",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:https": "set HTTPS=true&& set SSL_CRT_FILE=D:\\cert.pem&& set SSL_KEY_FILE=\\key.pem&& react-scripts start",
+    "start:https": "set HTTPS=true&& set SSL_CRT_FILE=D:\\app2\\node\\lab9\\LAB.crt&& set SSL_KEY_FILE=D:\\app2\\node\\lab9\\LAB.KEY&& react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
