@@ -5,13 +5,13 @@ import api from './instance';
 export const registrationAccount =async (body:any, type:string) =>
 {
 if(type =="Admin"){
-    await api.post(`auth/signup`, body);
+    await api.post(`api/auth/signup`, body);
 
 }else if(type =="Teacher"){
-    await api.post(`auth/signup-teacher`, body);
+    await api.post(`api/auth/signup-teacher`, body);
 
 }else if(type =="Student"){
-    await api.post(`auth/signup-student`, body);
+    await api.post(`api/auth/signup-student`, body);
 
 }
 
@@ -20,13 +20,13 @@ if(type =="Admin"){
 export const authAccount = async (body:any, type:string) =>{
     
     if(type =="Admin"){
-       return await api.post(`auth/signin`, body);
+       return await api.post(`api/auth/signin`, body);
     
     }else if(type =="Teacher"){
-        return await api.post(`auth/signin-teacher`, body);
+        return await api.post(`api/auth/signin-teacher`, body);
     
     }else if(type =="Student"){
-        return await api.post(`auth/signin-student`, body);
+        return await api.post(`api/auth/signin-student`, body);
     
     }
 
@@ -34,7 +34,7 @@ export const authAccount = async (body:any, type:string) =>{
 
 export const createUniver = async (body:any)=>{
     
-    const responce = await  api.post("admin/create-univer",body, {
+    const responce = await  api.post("api/admin/create-univer",body, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -47,7 +47,7 @@ export const createUniver = async (body:any)=>{
 
 export const setUpAttendence = async (body:any)=>{
     
-    const responce = await  api.post("student/validate-attendence",body, {
+    const responce = await  api.post("api/student/validate-attendence",body, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -58,7 +58,7 @@ export const setUpAttendence = async (body:any)=>{
 
 export const setUpFlagForReview = async (subjectId:number)=>{
     
-    const responce = await  api.post(`student/set-attendence-flag/${+subjectId}`,null, {
+    const responce = await  api.post(`api/student/set-attendence-flag/${+subjectId}`,null, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -70,7 +70,7 @@ export const setUpFlagForReview = async (subjectId:number)=>{
 
 export const setUpAcceptStudent = async (body:any)=>{
     
-    const responce = await  api.post(`teacher/review-acception-student`,body, {
+    const responce = await  api.post(`api/teacher/review-acception-student`,body, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -84,7 +84,7 @@ export const setUpAcceptStudent = async (body:any)=>{
 
 export const getStudentBySubjectIdAttendence = async (id:any)=>{
     
-    const responce = await  api.get(`teacher/student-by-subj/${id}`, {
+    const responce = await  api.get(`api/teacher/student-by-subj/${id}`, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -96,7 +96,7 @@ export const getStudentBySubjectIdAttendence = async (id:any)=>{
 
 export const getAmountStudentAttend = async (id:any)=>{
     
-    const responce = await  api.get(`teacher/amount-student-attend/${id}`, {
+    const responce = await  api.get(`api/teacher/amount-student-attend/${id}`, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -106,7 +106,7 @@ export const getAmountStudentAttend = async (id:any)=>{
 }
 export const startQuize = async (name:any)=>{
     
-    const responce = await  api.get(`quize/get-quize/${name}`, {
+    const responce = await  api.get(`api/quize/get-quize/${name}`, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -117,7 +117,7 @@ export const startQuize = async (name:any)=>{
 
 export const createQuize = async (body:any)=>{
     
-    const responce = await  api.post(`quize/create-quize`,body, {
+    const responce = await  api.post(`api/quize/create-quize`,body, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -131,7 +131,7 @@ export const createQuize = async (body:any)=>{
 
 export const createSubject = async (body:any)=>{
     
-    const responce = await  api.post("teacher/create-subject",body, {
+    const responce = await  api.post("api/teacher/create-subject",body, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -141,7 +141,7 @@ export const createSubject = async (body:any)=>{
 }
 export const generageTeacherKey = async ()=>{
     
-    const responce = await  api.post("admin/create-teacher-token",null, {
+    const responce = await  api.post("api/admin/create-teacher-token",null, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -153,7 +153,7 @@ export const generageTeacherKey = async ()=>{
 
 export const getStudentForReview = async (id:any)=>{
     
-    const responce = await  api.get(`teacher/students-review/${id}`, {
+    const responce = await  api.get(`api/teacher/students-review/${id}`, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -166,7 +166,7 @@ export const getStudentForReview = async (id:any)=>{
 
 export const deleteQRCode = async (id:any)=>{
     
-    const responce = await  api.delete(`/deleteQRCode?qrId=${id}`, {
+    const responce = await  api.delete(`api/deleteQRCode?qrId=${id}`, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -178,7 +178,7 @@ export const deleteQRCode = async (id:any)=>{
 
 export const addContents = async (id:any, body:any)=>{
     
-    const responce = await  api.post(`/addContentToQR?qrId=${id}`, body,{
+    const responce = await  api.post(`api/addContentToQR?qrId=${id}`, body,{
         headers: {
          'Content-Type': 'multipart/form-data',
 
@@ -193,7 +193,7 @@ export const addContents = async (id:any, body:any)=>{
 
 export const updateQR = async (id:any, body:any)=>{
     
-    const responce = await  api.put(`/updateQrCode?qrId=${id}`, body,{
+    const responce = await  api.put(`api/updateQrCode?qrId=${id}`, body,{
         headers: {
          'Content-Type': 'multipart/form-data',
 
@@ -208,7 +208,7 @@ export const updateQR = async (id:any, body:any)=>{
 
 export const getQRCodes = async ()=>{
     
-    const responce = await  api.get("/getQrCodes", {
+    const responce = await  api.get("api/getQrCodes", {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -219,7 +219,7 @@ export const getQRCodes = async ()=>{
 
 export const getContentes = async (id:number)=>{
     
-    const responce = await  api.get(`/getContents?qrId=${id}`, {
+    const responce = await  api.get(`api/getContents?qrId=${id}`, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -229,7 +229,7 @@ export const getContentes = async (id:number)=>{
 }
 export const getContentById = async (id:number)=>{
     
-    const responce = await  api.get(`/getContentById?id=${id}`, {
+    const responce = await  api.get(`api/getContentById?id=${id}`, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -241,7 +241,7 @@ export const getContentById = async (id:number)=>{
 }
 export const deleteContente = async (id:any)=>{
     
-    const responce = await  api.delete(`/deleteContent?id=${id}`, {
+    const responce = await  api.delete(`api/deleteContent?id=${id}`, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -254,7 +254,7 @@ export const deleteContente = async (id:any)=>{
 
 export const createPost = async (body:any)=>{
     
-    const responce = await  api.post("/createPost",body, {
+    const responce = await  api.post("api/createPost",body, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -270,7 +270,7 @@ export const createPost = async (body:any)=>{
 export const deletePost = async (id:any)=>{
     
     
-    const responce = await  api.delete(`/deletePost?postId=${id}`, {
+    const responce = await  api.delete(`api/deletePost?postId=${id}`, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -282,7 +282,7 @@ export const deletePost = async (id:any)=>{
 
 export const updatePostDesciption = async (id:any, body:any)=>{
     
-    const responce = await  api.put(`/updateDescriptionPost?postId=${id}`, body,{
+    const responce = await  api.put(`api/updateDescriptionPost?postId=${id}`, body,{
         headers: {
 
           Authorization: TokenManager.getToken()
@@ -294,7 +294,7 @@ export const updatePostDesciption = async (id:any, body:any)=>{
 
 export const updatePostAccess = async (id:any, body:any)=>{
     
-    const responce = await  api.put(`/updateAccessPost?postId=${id}`, body,{
+    const responce = await  api.put(`api/updateAccessPost?postId=${id}`, body,{
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -306,7 +306,7 @@ export const updatePostAccess = async (id:any, body:any)=>{
 
 export const addComment = async (body:any)=>{
     
-    const responce = await  api.post("/addComment",body, {
+    const responce = await  api.post("api/addComment",body, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -319,7 +319,7 @@ export const addComment = async (body:any)=>{
 
 export const getPosts = async ()=>{
     
-    const responce = await  api.get("/getPosts", {
+    const responce = await  api.get("api/getPosts", {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -331,7 +331,7 @@ export const getPosts = async ()=>{
 
 export const getUsersPosts = async ()=>{
     
-    const responce = await  api.get("/getUsersPublicPosts", {
+    const responce = await  api.get("api/getUsersPublicPosts", {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -342,7 +342,7 @@ export const getUsersPosts = async ()=>{
 export const putReaction = async (id:any)=>{
     
     
-    const responce = await  api.put(`/putReaction?postId=${id}`,null, {
+    const responce = await  api.put(`api/putReaction?postId=${id}`,null, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -354,7 +354,7 @@ export const putReaction = async (id:any)=>{
 
 export const getPostByID = async (id:number)=>{
     
-    const responce = await  api.get(`/getPostById?postId=${id}`, {
+    const responce = await  api.get(`api/getPostById?postId=${id}`, {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -368,7 +368,7 @@ export const getPostByID = async (id:number)=>{
 
 export const getStaticsCountQrcodeForDay = async ()=>{
     
-    const responce = await  api.get("/getStaticsCountQrcodeForDay", {
+    const responce = await  api.get("api/getStaticsCountQrcodeForDay", {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -378,7 +378,7 @@ export const getStaticsCountQrcodeForDay = async ()=>{
 }
 export const getLoggerEntities = async ()=>{
     
-    const responce = await  api.get("/getLoggerEntities", {
+    const responce = await  api.get("api/getLoggerEntities", {
         headers: {
           Authorization: TokenManager.getToken()
       },
@@ -391,7 +391,7 @@ export const getUserRole = async ()=>{
     
     try{
         
-        const responce = await  api.get("auth/user-credential", {
+        const responce = await  api.get("api/auth/user-credential", {
             headers: {
               Authorization: TokenManager.getToken()
           },
@@ -408,7 +408,7 @@ export const getAllSubject = async ()=>{
     
     try{
         
-        const responce = await  api.get("teacher/many-subject", {
+        const responce = await  api.get("api/teacher/many-subject", {
             headers: {
               Authorization: TokenManager.getToken()
           },
@@ -426,7 +426,7 @@ export const getAllSubjectForReview = async ()=>{
     
     try{
         
-        const responce = await  api.get("teacher/subjects-review", {
+        const responce = await  api.get("api/teacher/subjects-review", {
             headers: {
               Authorization: TokenManager.getToken()
           },
@@ -443,7 +443,7 @@ export const getCodeForQrSubject = async (id:number, liveTime:number)=>{
     
     try{
         
-        const responce = await  api.post(`teacher/create-code-subject?subjectId=${id}&liveTime=${liveTime}`, null,{
+        const responce = await  api.post(`api/teacher/create-code-subject?subjectId=${id}&liveTime=${liveTime}`, null,{
             headers: {
               Authorization: TokenManager.getToken()
           },
