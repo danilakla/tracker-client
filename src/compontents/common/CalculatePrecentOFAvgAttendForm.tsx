@@ -25,9 +25,14 @@ export const   CalculatePrecentOFAvgAttendForm = (param:any)=>{
     function initNam(event:any): void {
         setpassLecture(event.target.value)
       }
-    
+      function validateStringIsNumber(str:any) {
+        if (typeof str !== 'string' || isNaN(+str.trim())) {
+            throw new Error(`Input must be a numeric string, but got: ${str}`);
+        }
+    }
       async function  handleAgree(event:any) {
         try {
+          validateStringIsNumber(passLecture);
             const mustBeStudent = passLecture*param.amountStudent;
 
             const countAttende= (await getAmountStudentAttend(param.id)).count.attendanceCount
@@ -36,7 +41,7 @@ export const   CalculatePrecentOFAvgAttendForm = (param:any)=>{
             const procentOfStudent=(countAttende*100)/mustBeStudent;
             setprocentStudent(procentOfStudent)
         } catch (error) {
-          alert(error)      
+          alert("bad request")      
         }
       }
   return (

@@ -12,10 +12,11 @@ export default function GenerateStudentKey() {
       try {
         const data = await generageTeacherKey();
         setKey(data.key)
+        setOpen(true);
+
       } catch (error) {
-        alert(error)
+        alert('bad request')      
       }
-      setOpen(true);
     };
   
     const handleClose = () => {

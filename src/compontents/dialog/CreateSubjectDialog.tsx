@@ -46,17 +46,24 @@ export default function CreateSubjectDialog() {
       setnumberPassLecture(event.target.value)
     }
 
-
+    function validateStringIsNumber(str:string) {
+      if (typeof str !== 'string' || isNaN(+str.trim())) {
+          throw new Error(`Input must be a numeric string, but got: ${str}`);
+      }
+  }
       
       async function  handleAgree(event:any) {
         try {
+
+          validateStringIsNumber(course);
+          validateStringIsNumber(term);
           const data = await createSubject({subjectName, course, term, numberOfStudent, numberPassLecture})
           console.log(data);
           
           window. location. reload(); 
         
         } catch (error) {
-          alert(error)      
+          alert('bad request')      
         }
       }
   return (

@@ -150,6 +150,39 @@ export const generageTeacherKey = async ()=>{
       return responce.data
 }
 
+export const updateUniverByName = async (body:any)=>{
+    
+    const responce = await  api.put("api/admin/update-univer",body, {
+        headers: {
+          Authorization: TokenManager.getToken()
+      },
+      })
+      
+      return responce.data
+}
+export const deleteUniverAdm = async ()=>{
+    
+    const responce = await  api.delete(`api/admin/delete-univer`, {
+        headers: {
+          Authorization: TokenManager.getToken()
+      },
+      })
+      
+      return responce.data
+}
+
+
+
+export const getUniverForAdmin = async ()=>{
+    
+    const responce = await  api.get(`api/admin/get-univer`, {
+        headers: {
+          Authorization: TokenManager.getToken()
+      },
+      })
+        console.log(responce.data);
+      return responce.data
+}
 
 export const getStudentForReview = async (id:any)=>{
     

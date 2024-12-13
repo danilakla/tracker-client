@@ -48,7 +48,7 @@ async function  authUser(e:any) {
 
 navigate("/home");  
   } catch (error) {
-    alert("400, check the parameter")
+    alert('bad request')      
   }
 
  

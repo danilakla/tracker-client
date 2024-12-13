@@ -63,7 +63,7 @@ export const  CreateCodeQrForSUbject= observer((id:any)=> {
 
             
         } catch (error) {
-          alert(error)      
+          alert('bad request')      
         }
       }
   return (

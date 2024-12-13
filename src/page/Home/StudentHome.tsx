@@ -12,6 +12,7 @@ import { io } from 'socket.io-client';
 
 function StudentHome() {
 const [flag, setFlag]= useState(false);
+const [flagSuc, setFlagSuc]= useState(false);
 const [socket, setSocket]:any= useState();
 const [subjectId, setSubjectId]= useState(0);
   const[scanResult, setScanResult]= useState(null)
@@ -54,13 +55,17 @@ useEffect(()=>{
     });
     if(data.code=="success"){
       socket.emit('counter',result )
+      setFlagSuc(true);
     }
-   alert(data.code) 
-   if(data.status==400){
-      alert(data.code+data.status);
+   else if(data.status==400){
+    alert(data.code+" "+data.status);
 
       setSubjectId(data.subjectId);
       setFlag(true);
+    }else{
+      alert(data.code) 
+      window.location.reload();
+
     }
     
    } catch (error) {
@@ -76,6 +81,7 @@ useEffect(()=>{
     const data = await setUpFlagForReview(+subjectId);
     alert(data.reviewStatus);
     setFlag(false)
+    window.location.reload();
   } catch (error) {
     
   }
@@ -86,6 +92,7 @@ useEffect(()=>{
     <MenuAppBar name={'StudentPage'}/>
 
     <div>
+      {flagSuc&&<h1>Success</h1>}
   {flag&&<button onClick={sendFlag}>send flag to true for review</button>}
 </div>
 {scanResult

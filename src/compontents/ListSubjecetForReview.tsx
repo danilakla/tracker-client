@@ -68,7 +68,10 @@ async function getStudentMiss(id:any) {
     setsubjIdCurent(id);
 }
 if(!subjs){
-    return(<><h1>empty list</h1></>)
+}
+else if(subjs.length==0){
+  return(<><h1 style={{textAlign:"center"}}>Thre're no student for review </h1></>)
+
 }
 return (
     <>

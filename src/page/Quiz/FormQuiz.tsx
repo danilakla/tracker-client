@@ -1,6 +1,5 @@
 
 import { Button, TextField } from "@mui/material";
-import { log } from "console";
 import { ChangeEvent, Key, useEffect, useRef, useState } from "react";
 import { createQuize, getUserRole } from "../../api";
 import MenuAppBar from "../../compontents/header/auth/MenuAppBar";
@@ -88,21 +87,44 @@ export const  FormQuiz = ()=> {
         setQuestuions([...qustionmap])
 
       };
+      function validateQuestions(questions:any) {
+        questions.forEach((item :any, index:any) => {
+            // Check if 'question' is not empty
+            const isQuestionValid = item.question.trim() !== "";
     
+            // Check if 'correctAnswer' is specified and is a valid index
+            const isCorrectAnswerValid = item.correctAnswer && !isNaN(parseInt(item.correctAnswer));
+    
+            // Check if 'answers' has at least one non-empty value
+            const areAnswersValid = Array.isArray(item.answers) && item.answers.some((answer:any) => answer.trim() !== "");
+    
+            // If any validation fails, throw a general exception
+            if (!isQuestionValid || !isCorrectAnswerValid || !areAnswersValid) {
+                throw new Error(`Validation failed for question at index ${index+1}, because some fields are empty`);
+            }
+        });
+    }
     function initCorrectAnswear(event: ChangeEvent<HTMLInputElement>, index: number): void {
-        const qustionmap : any = questuions.map((e:any, i)=>{
+        let a=false;
+        console.log(JSON.stringify(questuions))
+      const qustionmap : any = questuions.map((e:any, i)=>{
             if(index==i){
                 e.correctAnswer=(event.target.value.toString())
-            }
+                if(e.answers.length<e.correctAnswer){
+                  alert("bad parameters");
+                  event.target.value ='';
+                }
+              }
+      
             return e;
         })
-
-        setQuestuions([...qustionmap])
+          setQuestuions([...qustionmap])
 
     }
 
        const handleGenerateJSON = async () => {
         try {
+          validateQuestions(questuions)
           const data = await createQuize({
             name:nameQuize,
             formtest:     JSON.stringify({
@@ -116,9 +138,10 @@ export const  FormQuiz = ()=> {
             quizSynopsis:"Test",
             questions:questuions
         })
+        alert('success')
         window. location. reload(); 
-        } catch (error) {
-          alert('error has occured, 403')
+        } catch (error :any) {
+          alert('bad request'+error.message)      
         }
 
 

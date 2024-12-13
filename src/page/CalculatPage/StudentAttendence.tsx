@@ -36,7 +36,7 @@ const [students, setStudents] = useState([]);
     <>
                    <MenuAppBar name="List student of subject"></MenuAppBar> 
 
-                   <div style={{display:"flex", justifyContent:"center",flexWrap:'wrap'}}>
+                  {students.length==0?<h1 style={{textAlign:"center"}}>Students don't attended so far </h1>: <div style={{display:"flex", justifyContent:"center",flexWrap:'wrap'}}>
                   {students.map(((e:any)=>{
                         return (
                           <>
@@ -62,7 +62,7 @@ const [students, setStudents] = useState([]);
                         )
 
                   }))}
-                   </div>
+                   </div>}
 </>
   )
 }

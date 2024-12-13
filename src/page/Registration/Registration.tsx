@@ -3,7 +3,6 @@ import React, { BaseSyntheticEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { Box, Button, CssBaseline, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, ThemeProvider, Typography, createTheme } from '@mui/material'
-import AlertDialog from '../../compontents/common/AlertDialog';
 import { registrationAccount } from '../../api';
 const defaultTheme = createTheme();
 
@@ -56,8 +55,9 @@ async function  registerUser(e:any) {
       teacherSecretKey
           }, role);
           navigate('/login')
-  } catch (error) {
-    alert("400 pls, check the parameter")
+  } catch (error :any ) {
+    console.log(error)
+    alert('bad request')      
   }
 
 
