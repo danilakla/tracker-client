@@ -139,6 +139,25 @@ export const createSubject = async (body:any)=>{
       
       return responce.data
 }
+export const deleteSubjectTeacher = async (id:any)=>{
+    const responce = await  api.delete(`api/teacher/delete-subject/${id}`, {
+        headers: {
+          Authorization: TokenManager.getToken()
+      },
+      })
+      
+      return responce.data
+}
+export const updateSubjectTeacher = async (body:any)=>{
+    
+    const responce = await  api.put("api/teacher/update-subject",body, {
+        headers: {
+          Authorization: TokenManager.getToken()
+      },
+      })
+      
+      return responce.data
+}
 export const generageTeacherKey = async ()=>{
     
     const responce = await  api.post("api/admin/create-teacher-token",null, {
@@ -180,7 +199,6 @@ export const getUniverForAdmin = async ()=>{
           Authorization: TokenManager.getToken()
       },
       })
-        console.log(responce.data);
       return responce.data
 }
 

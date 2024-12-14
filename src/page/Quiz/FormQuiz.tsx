@@ -106,7 +106,6 @@ export const  FormQuiz = ()=> {
     }
     function initCorrectAnswear(event: ChangeEvent<HTMLInputElement>, index: number): void {
         let a=false;
-        console.log(JSON.stringify(questuions))
       const qustionmap : any = questuions.map((e:any, i)=>{
             if(index==i){
                 e.correctAnswer=(event.target.value.toString())

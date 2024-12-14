@@ -36,7 +36,6 @@ export const   CalculatePrecentOFAvgAttendForm = (param:any)=>{
             const mustBeStudent = passLecture*param.amountStudent;
 
             const countAttende= (await getAmountStudentAttend(param.id)).count.attendanceCount
-          console.log(countAttende);
           
             const procentOfStudent=(countAttende*100)/mustBeStudent;
             setprocentStudent(procentOfStudent)

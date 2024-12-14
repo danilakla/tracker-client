@@ -31,8 +31,7 @@ const navigate = useNavigate()
       setdataJson(
       JSON.parse(data.form)
       )
-      console.log(    JSON.parse(data.form)
-      );
+    
       
     } catch (error) {
       alert("specify correct name")

@@ -32,7 +32,6 @@ export const  CreateCodeQrForSUbject= observer((id:any)=> {
     
       async function  handleAgree(event:any) {
         try {
-          console.log();
 
           if(!Number.isInteger(+time)) throw new Error("time is not a number");
           const code = await getCodeForQrSubject(id.id, time);
@@ -40,21 +39,17 @@ export const  CreateCodeQrForSUbject= observer((id:any)=> {
             query:{code}
           });
 
-          console.log(socket);
           TeacherStore.setAmountSelectedStudent(id.amountStudent);
           setSocket(socket)
           // Handle events or perform any necessary actions
           socket.on('connect', () => {
-            console.log('Socket connected');
             // Additional logic when the connection is established
           });
       
           socket.on('disconnect', () => {
-            console.log('Socket disconnected');
             // Additional logic when the connection is disconnected
           });
           socket.on('incement',(data:any)=>{
-            console.log(data);
             TeacherStore.incrementStudentCount();
             
             

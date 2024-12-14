@@ -106,7 +106,6 @@ return (
         <div style={{display:"flex", flexDirection:'row', flexWrap:'wrap'}}>
     {subjIdCurent==subjdata.id?
      students.map((e:any)=>{
-        console.log(e.subjectId);
         if(subjIdCurent != e.subjectId){
             return (<>
             </>)

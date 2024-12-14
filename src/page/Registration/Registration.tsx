@@ -56,7 +56,6 @@ async function  registerUser(e:any) {
           }, role);
           navigate('/login')
   } catch (error :any ) {
-    console.log(error)
     alert('bad request')      
   }
 

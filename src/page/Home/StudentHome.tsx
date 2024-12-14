@@ -40,17 +40,14 @@ useEffect(()=>{
 
 
     const socket = await io(process.env.REACT_APP_SERVER||'https://localhost:3333');
-    console.log(socket);
     
     setSocket(socket)
     // Handle events or perform any necessary actions
     socket.on('connect', () => {
-      console.log('Socket connected');
       // Additional logic when the connection is established
     });
 
     socket.on('disconnect', () => {
-      console.log('Socket disconnected');
       // Additional logic when the connection is disconnected
     });
     if(data.code=="success"){

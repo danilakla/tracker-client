@@ -1,18 +1,17 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material'
 import React from 'react'
-import { createSubject, createUniver } from '../../api';
 import { useNavigate } from 'react-router-dom';
+import { updateSubjectTeacher } from '../../api';
 
-export default function CreateSubjectDialog() {
+export default function UpdateSubjectDialog(dataObj:any) {
     const [open, setOpen] = React.useState(false);
-    const navigate =useNavigate()
 
 
-    const [subjectName, setsubjectName] = React.useState('');
-    const [course, setcourse] = React.useState('');
-    const [term, setterm] = React.useState('');
-    const [numberOfStudent, setnumberOfStudent] = React.useState(0);
-    const [numberPassLecture, setnumberPassLecture] = React.useState(0);
+    const [subjectName, setsubjectName] = React.useState(dataObj.subjectName);
+    const [course, setcourse] = React.useState(dataObj.course);
+    const [term, setterm] = React.useState(dataObj.term);
+    const [numberOfStudent, setnumberOfStudent] = React.useState(dataObj.numberOfStudent);
+    const [numberPassLecture, setnumberPassLecture] = React.useState(dataObj.numberPassLecture);
 
     const handleClickOpen = () => {
       setOpen(true);
@@ -57,15 +56,16 @@ export default function CreateSubjectDialog() {
 
           validateStringIsNumber(course);
           validateStringIsNumber(term);
-          if(+course>0&&+term>0&&numberOfStudent>0){
-
-          const data = await createSubject({subjectName, course, term, numberOfStudent, numberPassLecture})
+          if(course>0&&term>0&&numberOfStudent>0){
+            
+          
+          const data = await updateSubjectTeacher({subjectId:dataObj.id, subjectName, course, term, numberOfStudent, numberPassLecture,})
           
           window. location. reload(); 
-          }else{
-            alert("bad request")
           }
-        
+          else{
+            alert('bad request')
+          }
         } catch (error) {
           alert('bad request')      
         }
@@ -74,7 +74,7 @@ export default function CreateSubjectDialog() {
     <div>
 
 <Button variant="outlined" onClick={handleClickOpen}>
-      Create Subject
+      Update Subject
         </Button>
       <Dialog
         open={open}
@@ -93,6 +93,7 @@ export default function CreateSubjectDialog() {
                 required
                 fullWidth
                 id="email"
+                value={subjectName}
                 onChange={initSubjName}
                 label="Subj name"
                 name="email"
@@ -102,6 +103,7 @@ export default function CreateSubjectDialog() {
 
               
             <TextField
+            value={course}
                 margin="normal"
                 required
                 fullWidth
@@ -115,6 +117,7 @@ export default function CreateSubjectDialog() {
 
               
             <TextField
+            value={term}
                 margin="normal"
                 required
                 fullWidth
@@ -128,6 +131,7 @@ export default function CreateSubjectDialog() {
 
               
             <TextField
+            value={numberOfStudent}
                 margin="normal"
                 required
                 fullWidth

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { getAllSubject } from '../api'
+import { deleteSubjectTeacher, getAllSubject } from '../api'
 import { CreateCodeQrForSUbject } from './dialog/CreateCodeQrForSUbject';
 import { Card, CardContent, Typography, CardActions, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { CalculatePrecentOFAvgAttendForm } from './common/CalculatePrecentOFAvgAttendForm';
+import UpdateSubjectDialog from './dialog/UpdateSubjectDialog';
+import { wrap } from 'module';
 
 export default function ListSubject() {
     const navigate = useNavigate()
@@ -48,12 +50,17 @@ return (
         </Typography>
       </CardContent>
       <CardActions>
-        <div style={{display:'flex', justifyContent:'center'}}>
+        <div style={{display:'flex', flexWrap:'wrap', justifyContent:'center'}}>
       <CreateCodeQrForSUbject amountStudent={e.numberOfStudent}  id={e.id}/>
       <CalculatePrecentOFAvgAttendForm id={e.id} amountStudent={e.numberOfStudent} />
+<div>
 <Button variant="outlined" onClick={()=>(navigate(`/StudentAttendence?id=${e.id}`))}>
         show
         </Button>
+        </div>
+        <UpdateSubjectDialog id={e.id} numberPassLecture ={e.numberPassLecture} subjectName ={e.subject_name} course={e.course} term={e.term} numberOfStudent={e.numberOfStudent} />
+
+        <Button variant="outlined"  onClick={async ()=>{await deleteSubjectTeacher(e.id); window.location.reload()}}>Delete</Button>
         </div>
       </CardActions>
     </Card>
