@@ -184,7 +184,7 @@ export default function MenuAppBar(prop:any) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>To Registration</MenuItem>
+                <MenuItem onClick={()=>{localStorage.removeItem('access_token'); navigate('/')}}>To Registration</MenuItem>
               </Menu>
             </div>
           )}
